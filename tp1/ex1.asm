@@ -59,11 +59,17 @@ main:
 	call print_string
 	mov rdi, [orResult]
 	call print_int
+
+	lea rdi, [linefeed]
+	call print_string
 	
 	lea rdi, [andOut]
 	call print_string
 	mov rdi, [andResult]
 	call print_int
+
+	lea rdi, [linefeed]
+	call print_string
 	
 	lea rdi, [xorOut]
 	call print_string

@@ -6,7 +6,7 @@
 	segment .data
 prompt1 db "Entrez un entier : ", 0
 prompt2 db "Entrez un autre entier : ", 0
-formatSortie db "Somme : ", 0
+formatSortie db "Difference : ", 0
 	longIntFormat db "%ld", 0
 	newLine db 10, 0
 	segment .bss
@@ -37,7 +37,7 @@ main:
 	mov rcx, [entier2]
 
 	; calcul de la somme et sauvegarde du resultat en memoire
-	add rbx, rcx
+	sub rbx, rcx
 	mov [resultat], rbx
 	; appel print_string
 	lea rdi, [formatSortie]
