@@ -24,37 +24,33 @@ main:
 	
 	lea rdi, [prompt]
 	call print_string
-	
 	lea rdi, [result]
 	call read_int
 	
 	mov rax, [result]
 	test rax, 1
 	jnz .odd
-
+	
 	lea rdi, [evenResult]
 	call print_string
-
-    lea rdi, [linefeed]
-    call print_string
-
+	
 	jmp .end
 	
 .odd:
 	lea rdi, [oddResult]
 	call print_string
-
-    lea rdi, [linefeed]
-    call print_string
-
-    jmp .end
+	
+	jmp .end
 	
 .end:
+	lea rdi, [linefeed]
+	call print_string
+	
 	pop r12
 	pop rbx
 	mov rsp, rbp
 	pop rbp
-
+	
 	mov rax, 0
 	ret
 	

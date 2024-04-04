@@ -24,48 +24,38 @@ main:
 	push rbx
 	push r12
 	
-	; Print the prompt
 	lea rdi, [prompt]
 	call print_string
-	
-	; Read the result
 	lea rdi, [result]
 	call read_int
 	
-	; Check if the user is a man or a woman
 	movzx rax, byte [result]
 	cmp rax, 0
 	je man
 
     cmp rax, 1
     je woman
-    jne other
+    
+	lea rdi, [otherResult]
+	jmp exit
 	
 man:
-	; Print greeting for man
 	lea rdi, [manResult]
-	call print_string
 	jmp exit
 	
 woman:
-	; Print greeting for woman
 	lea rdi, [womanResult]
-	call print_string
 	jmp exit
-
-other:
-    ; Print error message
-    lea rdi, [otherResult]
-    call print_string
-    jmp exit
 	
 exit:
-	; Call the function to restore callee - saved registers
+	call print_string
+	lea rdi, [linefeed]
+	call print_string
+
 	pop r12
     pop rbx
     pop rbp
 	
-	; Exit properly
 	mov rax, 0
 	ret
 	

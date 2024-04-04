@@ -6,8 +6,7 @@
 	segment .data
     prompt1 db "Premier nombre: ", 0
     prompt2 db "Second nombre: ", 0
-    prompt3 db "Troisieme nombre: ", 0
-    promptOut db "Produit: ", 0
+    promptOut db "Difference: ", 0
     newLine db 10, 0
     longIntFormat db "%ld", 0
 
@@ -18,9 +17,9 @@
 	global main
 main:
     push rbp
-    mov rbp, rsp
-    push rbx
-    push r12
+	mov rbp, rsp
+	push rbx
+	push r12
 
     lea rdi, [prompt1]
     call print_string
@@ -34,14 +33,7 @@ main:
     lea rdi, [result]
     call read_int
 
-    imul rbx, [result]
-
-    lea rdi, [prompt3]
-    call print_string
-    lea rdi, [result]
-    call read_int
-
-    imul rbx, [result]
+    sub rbx, [result]
 
     lea rdi, [promptOut]
     call print_string
@@ -55,7 +47,7 @@ main:
     pop rbx
     pop rbp
 
-    mov rax, 1
+    mov rax , 1
     ret
 	
 	
