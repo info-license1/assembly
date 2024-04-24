@@ -6,7 +6,7 @@
 	segment .data
 prompt1 db "Entrez un entier : ", 0
 prompt2 db "Entrez un autre entier : ", 0
-formatSortie db "Difference : ", 0
+formatSortie db "Différence : ", 0
 	longIntFormat db "%ld", 0
 	newLine db 10, 0
 	segment .bss

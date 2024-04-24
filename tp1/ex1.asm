@@ -4,13 +4,13 @@
 	extern scanf
 	
 	segment .data
-prompt1 db "First number : ", 0
-prompt2 db "Second number : ", 0
+prompt1 db "Entrez un entier : ", 0
+prompt2 db "Entrez un autre entier : ", 0
 orOut db "OR : ", 0
 andOut db "AND : ", 0
 xorOut db "XOR : ", 0
 	longIntFormat db "%ld", 0
-    linefeed db 10, 0
+	linefeed db 10, 0
 	
 	segment .bss
 	num1 resq 1
@@ -23,10 +23,10 @@ xorOut db "XOR : ", 0
 	global main
 	
 main:
-    push rbp
-    mov rbp, rsp
+	push rbp
+	mov rbp, rsp
 	push rbx
-    push r12
+	push r12
 	
 	; Get the 2 numbers and print their OR, AND, and XOR
 	lea rdi, [prompt1]
@@ -59,7 +59,7 @@ main:
 	call print_string
 	mov rdi, [orResult]
 	call print_int
-
+	
 	lea rdi, [linefeed]
 	call print_string
 	
@@ -67,7 +67,7 @@ main:
 	call print_string
 	mov rdi, [andResult]
 	call print_int
-
+	
 	lea rdi, [linefeed]
 	call print_string
 	
@@ -75,13 +75,13 @@ main:
 	call print_string
 	mov rdi, [xorResult]
 	call print_int
-
-    lea rdi, [linefeed]
-    call print_string
 	
-    pop r12
+	lea rdi, [linefeed]
+	call print_string
+	
+	pop r12
 	pop rbx
-    pop rbp
+	pop rbp
 	
 	mov rax, 0
 	ret

@@ -4,9 +4,9 @@
 	extern scanf
 	
 	segment .data
-prompt db "Are you a man or a woman (0 or 1) : ", 0
-	manResult db "Hello, sir!", 10, 0
-	womanResult db "Hello, madam!", 10, 0
+prompt db "Saisir 0 pour un homme et 1 pour une femme : ", 0
+	manResult db "Bonjour Monsieur", 10, 0
+	womanResult db "Bonjour Madame", 10, 0
 	longIntFormat db "%ld", 0
 	linefeed db 10
 	

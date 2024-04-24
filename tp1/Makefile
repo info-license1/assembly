@@ -7,7 +7,7 @@
 .SUFFIXES: .o .asm
 .PHONY: all
 
-PROGS=prog
+PROGS=ex7
 
 AS=nasm
 #AS=yasm

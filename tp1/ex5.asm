@@ -4,7 +4,7 @@
 	extern scanf
 	
 	segment .data
-    prompt db "Entrer un entier signé : ", 0
+    prompt db "Entrer un entier positif : ", 0
     yesString db "L'entier EST une puissance de 2", 0
     noString db "L'entier N'EST PAS une puissance de 2", 0
 	longIntFormat db "%ld", 0
@@ -37,12 +37,6 @@ main:
     and rbx, [result]
     test rbx, rbx
     jz is_power_of_2
-
-	neg rbx
-	dec rbx
-	and rbx, [result]
-	test rbx, rbx
-	jz is_power_of_2
 
 not_power_of_2:
     lea rdi, [noString]

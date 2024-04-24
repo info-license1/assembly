@@ -4,10 +4,10 @@
 	extern scanf
 	
 	segment .data
-prompt db "Are you a man or a woman (0 or 1) : ", 0
-	manResult db "Hello, sir!", 10, 0
-	womanResult db "Hello, madam!", 10, 0
-    otherResult db "Hello, person!", 10, 0
+prompt db "Saisir 0 pour un homme et 1 pour une femme : ", 0
+	manResult db "Bonjour Monsieur", 10, 0
+	womanResult db "Bonjour Madame", 10, 0
+    otherResult db "Bonjour", 10, 0
 	longIntFormat db "%ld", 0
 	linefeed db 10
 	
@@ -24,38 +24,48 @@ main:
 	push rbx
 	push r12
 	
+	; Print the prompt
 	lea rdi, [prompt]
 	call print_string
+	
+	; Read the result
 	lea rdi, [result]
 	call read_int
 	
+	; Check if the user is a man or a woman
 	movzx rax, byte [result]
 	cmp rax, 0
 	je man
 
     cmp rax, 1
     je woman
-    
-	lea rdi, [otherResult]
-	jmp exit
+    jne other
 	
 man:
+	; Print greeting for man
 	lea rdi, [manResult]
+	call print_string
 	jmp exit
 	
 woman:
+	; Print greeting for woman
 	lea rdi, [womanResult]
+	call print_string
 	jmp exit
+
+other:
+    ; Print error message
+    lea rdi, [otherResult]
+    call print_string
+    jmp exit
 	
 exit:
-	call print_string
-	lea rdi, [linefeed]
-	call print_string
-
+	; Call the function to restore callee - saved registers
 	pop r12
     pop rbx
     pop rbp
 	
+	; Exit properly
 	mov rax, 0
 	ret
 	

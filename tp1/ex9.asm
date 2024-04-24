@@ -1,18 +1,20 @@
+; Écrire un programme qui demande 10 entiers signés à l'utilisateur,
+; stocke les éléments dans un tableau
+; puis affiche les éléments du tableau dans l'ordre inverse.
+
 	DEFAULT REL
 	
 	extern printf
 	extern scanf
 	
 	segment .data
-    prompt1 db "Entrez un entier : ", 0
-    prompt2 db "Entrez un deuxième entier : ", 0
-    prompt3 db "Entrez un troisième entier : ", 0
-	resultString db "Produit : ", 0
+    prompt db "Enter an integer: ", 0
+    output db "The integers in reverse order are: ", 0
 	longIntFormat db "%ld", 0
 	linefeed db 10, 0
 	
 	segment .bss
-	result resb 1
+	array resq 10
 	
 	segment .text
 	global main
@@ -23,43 +25,37 @@ main:
 	push rbx
 	push r12
 
-    lea rdi, [prompt1]
+    lea rdi, [prompt]
     call print_string
-    lea rdi, [result]
+
+    mov r12, 0
+    mov rbx, 0
+    mov rdi, array
+    mov rsi, 0
+    mov rdx, 10
     call read_int
 
-    mov r12, [result]
-
-    lea rdi, [prompt2]
+    mov rdi, 0
+    mov rbx, 9
+    lea rdi, [output]
     call print_string
-    lea rdi, [result]
-    call read_int
 
-    imul r12, [result]
-
-    lea rdi, [prompt3]
-    call print_string
-    lea rdi, [result]
-    call read_int
-
-    imul r12, [result]
-
-    lea rdi, [resultString]
-    call print_string
-    mov rdi, r12
+print_loop:
+    mov rdi, [array + rbx * 8]
     call print_int
-    
-    lea rdi, [linefeed]
+    mov rdi, linefeed
     call print_string
-	
-	pop r12
-	pop rbx
-	mov rsp, rbp
-	pop rbp
+    dec rbx
+    cmp rbx, rdi
+    jge print_loop
 
-	mov rax, 0
-	ret
-	
+    pop r12
+    pop rbx
+    pop rbp
+    ret
+
+
+
 print_string:
 	enter 0, 0
 	mov rax, 0
